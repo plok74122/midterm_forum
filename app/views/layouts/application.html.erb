@@ -9,6 +9,10 @@
   </head>
 
   <body>
+    <div class="panel-heading">
+      <p style="color: green"><%= flash[:notice] %></p>
+      <p style="color: red"><%= flash[:alert] %></p>
+    </div>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,22 @@
+<h1>SOS_Forum</h1>
+
+<div class="panel-body">
+  <h3>Add a New Request </h3>
+  
+</div>
+
+<table class="table">
+  <tr>
+    <th>TITLE</th>
+    <th>TIME CREATE</th>
+    <th>LASTEST UPDATED</th>
+  </tr>
+  <tr>
+    <% @requests.each do |request| %>
+      <td><%= link_to request.title , request_path(request) %></td>
+      <td><%= request.created_at %></td>
+      <td><%= request.updated_at %></td>
+    <% end %>
+  </tr>
+
+<%= paginate @requests %>
