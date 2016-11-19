@@ -12,6 +12,7 @@ class RequestsController < ApplicationController
   end
 
   def show
+    @cm = @request.comments
   end
 
   def new

@@ -11,6 +11,17 @@
   <% end %>
 
 
+    <%= link_to "Comment" , new_request_comment_path(@request) %>
+
+    <% @cm.each do |c| %>
+      <%= c.details %>
+
+      <%= link_to "Delete" , request_comment_path(@request , c ) , :method => :delete %>
+    <% end %>
+
+
+
+
 </table>
 
 <%= link_to "Back to index" , requests_path %>
