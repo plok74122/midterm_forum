@@ -4,9 +4,11 @@
     <%= form_for @request , :url => request_path(@request) , :method => "patch" do |f| %>
       <%= render :partial => "form" , :locals => {:f => f} %>
       <%= f.submit %>
+
     <% end %>
   <% else %>
     <tr><h2><%= @request.title %></h2></tr>
+
     <td><%= @request.content %></td>
   <% end %>
 

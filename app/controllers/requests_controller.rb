@@ -57,7 +57,7 @@ class RequestsController < ApplicationController
   end
 
   def request_params
-    params.require(:request).permit(:title, :content)
+    params.require(:request).permit(:title, :content , :category_id )
   end
 
 
