@@ -2,21 +2,34 @@
 
 <div class="panel-body">
   <h3>Add a New Request </h3>
-  
+  <% if @request.id %>
+    <%= form_for @request , :url => request_path(@request, :page => params[:page]) , :method => :patch do |f|%>
+      <%= render :partial => "form" , :locals => {:f => f} %>
+      <%= f.submit %>
+    <% end %>
+  <% else %>
+    <%= form_for @request , :url => requests_path do |f| %>
+      <%= render :partial => "form" , :locals => {:f => f} %>
+      <%= f.submit %>
+    <% end %>
+  <% end %>
 </div>
 
 <table class="table">
   <tr>
     <th>TITLE</th>
+
     <th>TIME CREATE</th>
     <th>LASTEST UPDATED</th>
   </tr>
-  <tr>
-    <% @requests.each do |request| %>
-      <td><%= link_to request.title , request_path(request) %></td>
-      <td><%= request.created_at %></td>
-      <td><%= request.updated_at %></td>
-    <% end %>
-  </tr>
 
-<%= paginate @requests %>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= link_to request.title , request_path(request) %></td>
+        <td><%= request.created_at %></td>
+        <td><%= request.updated_at %></td>
+      </tr>
+    <% end %>
+
+</table>
+  <%= paginate @requests %>

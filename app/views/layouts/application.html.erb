@@ -12,6 +12,8 @@
     <div class="panel-heading">
       <p style="color: green"><%= flash[:notice] %></p>
       <p style="color: red"><%= flash[:alert] %></p>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
     </div>
     <%= yield %>
   </body>
