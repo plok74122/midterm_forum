@@ -12,9 +12,17 @@
     <div class="panel-heading">
       <p style="color: green"><%= flash[:notice] %></p>
       <p style="color: red"><%= flash[:alert] %></p>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+
     </div>
+
+    <% if current_user %>
+    <h2>Welcome! <%= current_user.email %></h2>
+       <%= link_to('Sign out', destroy_user_session_path, :method => :delete) %> |
+       <%= link_to('Change Password', edit_registration_path(:user)) %>
+     <% else %>
+        <%= link_to('SIGN UP', new_registration_path(:user)) %> |
+        <%= link_to('Sign in', new_session_path(:user)) %>
+     <% end %>
     <%= yield %>
   </body>
 </html>

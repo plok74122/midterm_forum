@@ -18,7 +18,7 @@
 <table class="table">
   <tr>
     <th>TITLE</th>
-
+    <th>CREATOR</th>
     <th>TIME CREATE</th>
     <th>LASTEST UPDATED</th>
   </tr>
@@ -26,8 +26,20 @@
     <% @requests.each do |request| %>
       <tr>
         <td><%= link_to request.title , request_path(request) %></td>
+        <td><%= request.user.try(:short_name) %></td>
         <td><%= request.created_at %></td>
         <td><%= request.updated_at %></td>
+        <td>
+          <% if request.user == current_user %>
+            <%= link_to "Edit" , edit_request_path(request)  %>
+          <% end %>
+        </td>
+        <td>
+          <% if request.user == current_user %>
+            <%= link_to "Delete" , request_path(request,:page =>params[:page]),
+                :method => "delete" , :data => { :confirm => "Are you sure to kill me?"} %>
+        </td>
+          <% end %>
       </tr>
     <% end %>
 
