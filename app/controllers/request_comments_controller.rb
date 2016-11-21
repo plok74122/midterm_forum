@@ -10,6 +10,7 @@ class RequestCommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+      flash[:notice] = "Create Successfully!"
       redirect_to request_path(@request)
     else
       render :action => "new"
@@ -17,7 +18,7 @@ class RequestCommentsController < ApplicationController
   end
 
   def destroy
-    @comment = @request.comments.find(params[:id])
+    @comment = current_user.comments.find(params[:id])
     @comment.destroy
     redirect_to request_path(@request)
     flash[:alert] = "Delete Successfully!"
@@ -30,6 +31,8 @@ class RequestCommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:details, :user_id , :request_id )
+    # 不需要permit request_id & user_id
+    # 第十行提供了user_id @request.comments.new 提供了@request_id
+    params.require(:comment).permit(:details)
   end
 end

@@ -3,7 +3,7 @@ class CreateRequests < ActiveRecord::Migration[5.0]
     create_table :requests do |t|
       t.string :title
       t.text :content
-
+      t.integer :category_id
       t.timestamps
     end
   end

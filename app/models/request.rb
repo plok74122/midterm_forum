@@ -6,7 +6,6 @@ class Request < ApplicationRecord
   belongs_to :user
   has_many :comments , :dependent => :destroy
 
-  has_many :request_categoryships , :dependent => :destroy
-  has_many :categories , :dependent => :destroy , :through => :request_categoryships
+  belongs_to :category
 
 end

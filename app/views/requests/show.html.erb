@@ -1,29 +1,23 @@
 <table class="table">
-
   <% if @request.user == current_user %>
-    <%= form_for @request , :url => request_path(@request) , :method => "patch" do |f| %>
-      <%= render :partial => "form" , :locals => {:f => f} %>
-      <%= f.submit %>
-
-    <% end %>
+      <%= form_for @request, :url => request_path(@request), :method => "patch" do |f| %>
+          <%= render :partial => "form", :locals => { :f => f } %>
+          <%= f.submit %>
+      <% end %>
   <% else %>
-    <tr><h2><%= @request.title %></h2></tr>
-
-    <td><%= @request.content %></td>
+      <tr><h2><%= @request.title %></h2></tr>
+      <td><%= @request.content %></td>
   <% end %>
-
-
-    <%= link_to "Comment" , new_request_comment_path(@request) %>
-
-    <% @cm.each do |c| %>
+  <!--這邊排版有點怪怪的 只做了一些簡單的修改-->
+  <% @cm.each do |c| %>
       <%= c.details %>
-
-      <%= link_to "Delete" , request_comment_path(@request , c ) , :method => :delete %>
-    <% end %>
-
-
-
-
+      <% if c.user == current_user %>
+          <%= link_to "Delete", request_comment_path(@request, c), :method => :delete %>
+      <% end %>
+      <br>
+  <% end %>
 </table>
-
-<%= link_to "Back to index" , requests_path %>
+<br>
+<%= link_to "Comment", new_request_comment_path(@request) %>
+<br>
+<%= link_to "Back to index", requests_path %>

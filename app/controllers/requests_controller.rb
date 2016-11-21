@@ -4,14 +4,21 @@ class RequestsController < ApplicationController
 
   def index
     @requests = Request.page(params[:page]).per(10)
+    # 沒有檢查params[:id]是不是current_user所有
     if params[:id]
-      @request = Request.find(params[:id])
+      @request = current_user.requests.find_by_id(params[:id])
+      unless @request
+        @request = Request.new
+        flash.now[:notice] = "你不能修改他人的資料"
+      end
     else
       @request = Request.new
     end
   end
 
   def show
+    # 避免使用縮寫 what's cm?
+    # @comments better
     @cm = @request.comments
   end
 
